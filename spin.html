@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Apply styles to create a divided circle */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('wall.jpg'); /* Set the background image */
+            background-size: cover; /* Cover the entire viewport */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            overflow: hidden; /* Disable scrolling */
+        }
+
+        .circle-container {
+            position: relative;
+            width: 600px; /* Set the container width */
+            height: 600px; /* Set the container height */
+        }
+
+        .circle {
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
+            border-radius: 50%;
+            position: relative;
+            background: conic-gradient(
+                #E54C19 0deg 60deg,
+                #E59719 60deg 120deg,
+                #E5DC19 120deg 180deg,
+                #159C05 180deg 240deg,
+                #0C157A 240deg 300deg,
+                #7A0C24 300deg 360deg
+            );
+            border: 5px solid #000; /* Add a black border with a thickness of 5px */
+        }
+
+        .section {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            transform-origin: 50% 100%;
+        }
+
+        .circle .section:nth-child(1) { transform: rotate(30deg) translateY(40%); }
+        .circle .section:nth-child(2) { transform: rotate(90deg) translateY(40%); }
+        .circle .section:nth-child(3) { transform: rotate(150deg) translateY(40%); }
+        .circle .section:nth-child(4) { transform: rotate(210deg) translateY(40%); }
+        .circle .section:nth-child(5) { transform: rotate(270deg) translateY(40%); }
+        .circle .section:nth-child(6) { transform: rotate(330deg) translateY(40%); }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            left: calc(50% + 295px); /* Adjust the position to the right (3 o'clock position) */
+            transform: translate(-50%, -50%) rotate(180deg); /* Rotate the arrow to point left */
+            width: 20px;
+            height: 40px;
+            background-color: #333;
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+        }
+
+        .centered-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px; /* Set the button width */
+            height: 100px; /* Set the button height */
+            background-color: #fff; /* Button background color */
+            color: #333; /* Button text color */
+            border: 1px solid #333; /* Button border */
+            border-radius: 50%; /* Make the button fully round */
+            cursor: pointer;
+        }
+
+        .note {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .rotated-text {
+            transform: rotateZ(-90deg);
+        }
+    </style>
+    <title>Christmas-themed Animated Circle with Fully Round Button Example</title>
+</head>
+<body>
+    <!-- Create a container for the circle, arrow, and button -->
+    <div class="circle-container">
+        <!-- Create a div with the class "circle" -->
+        <div class="circle">
+            <!-- Add text to each section -->
+            <div class="section">
+                <div class="rotated-text">
+                    Nog een keer draaien
+                </div>
+            </div>
+            <div class="section">
+                <div class="rotated-text">
+                    Normale Koekje
+                </div>
+            </div>
+            <div class="section">
+                <div class="rotated-text">
+                    Chocolade Koekje
+                </div>
+            </div>
+            <div class="section">
+                <div class="rotated-text">
+                    Cake
+                </div>
+            </div>
+            <div class="section">
+                <div class="rotated-text">
+                    Nog een keer draaien
+                </div>
+            </div>
+            <div class="section">
+                <div class="rotated-text">
+                    Jackpot
+                </div>
+            </div>
+        </div>
+        <!-- Create an arrow element with the class "arrow" -->
+        <div class="arrow"></div>
+        <!-- Create a button with the class "centered-button" -->
+        <button class="centered-button" onclick="spinWheel()">Draai</button>
+    </div>
+
+    <!-- Add a note to the bottom right of the page -->
+    <div class="note">Gemaakt door Sami Y. C.</div>
+
+    <script>
+        // JavaScript function to add and remove the 'spin' class
+        function spinWheel() {
+            const wheel = document.querySelector('.circle');
+            const randomRotation = 360 * (5 + Math.random() * 5); // Spin between 5 and 10 rotations
+            const totalRotation = randomRotation; // Positive to ensure clockwise rotation
+
+            wheel.style.transition = 'transform 5s ease-in-out'; /* Use ease-in-out for a smooth transition */
+            wheel.style.transform = `rotate(${totalRotation}deg)`; // Set the rotation to the total degrees
+
+            // Remove the 'spin' class after the animation completes
+            setTimeout(() => {
+                wheel.style.transition = 'transform 0s'; // Disable the transition to make the next spin smooth
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
